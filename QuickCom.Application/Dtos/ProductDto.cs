@@ -7,7 +7,7 @@ namespace QuickCom.Application.Dtos
         public int Id { get; set; }
         public string? Name { get; set; } 
         public int Price { get; set; }
-        public CategoryDto CategoryDto { get; set; }
+        public CategoryDto Category { get; set; }
     }
     public class ProductCreateDto
     {
@@ -18,7 +18,7 @@ namespace QuickCom.Application.Dtos
     public class ProductUpdateDto
     {
         public string? Name { get; set; } 
-        public int Price { get; set; }
+        public int? Price { get; set; }
         public int CategoryId { get; set; }
     }
     public class ProductListDto : BasePageableDto, IDto

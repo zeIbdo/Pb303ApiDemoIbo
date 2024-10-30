@@ -18,7 +18,8 @@ namespace QuickCom.Persistence
         {
             services.AddDbContext<AppDbContext>(options =>
             {
-                options.UseSqlServer(configuration.GetConnectionString("Default"));
+                options.UseSqlServer(configuration.GetConnectionString("Default"),
+                b => b.MigrationsAssembly("QuickCom.Persistence"));
             });
 
             services.AddScoped<IProductRepository, ProductRepository>();

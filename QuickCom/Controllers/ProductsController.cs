@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuickCom.Application.Dtos;
 using QuickCom.Application.Services.Abstractions;
 
@@ -18,7 +19,7 @@ namespace QuickCom.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetByPage([FromQuery] PageRequest pageRequest)
         {
-            var prodList = await _productService.GetListAsync(index: pageRequest.Index, size: pageRequest.Size);
+            var prodList = await _productService.GetListAsync(index: pageRequest.Index, size: pageRequest.Size,include:x=>x.Include(y=>y.Category));
 
             return Ok(prodList);
         }
@@ -28,7 +29,7 @@ namespace QuickCom.API.Controllers
         {
             if (id == null) return NotFound();
 
-            var prod = await _productService.GetAsync(id.Value);
+            var prod = await _productService.GetAsync(predicate:x=>x.Id==id, include: x => x.Include(y => y.Category));
 
             return Ok(prod);
         }
